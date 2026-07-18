@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Error</title>
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navigation :: menu}"></div>
+
+<h2>Error</h2>
+
+<p style="color:red"
+   th:text="${error}">
+</p>
+
+<br>
+
+<a href="javascript:history.back()">
+    Back
+</a>
+
+</body>
+</html>

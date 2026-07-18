@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+           http://www.liquibase.org/xml/ns/dbchangelog
+           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="010-seed-coaches" author="den">
+        
+        <insert tableName="coach">
+            <column name="name" value="Den Leon"/>
+            <column name="experience_years" valueNumeric="16"/>
+            <column name="phone" value="+375296320523"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="011-more-coaches" author="den">
+        <insert tableName="coach">
+            <column name="name" value="Di Guoyoung"/>
+            <column name="experience_years" valueNumeric="65"/>
+            <column name="phone" value="+8677258978529"/>
+        </insert>
+
+        <insert tableName="coach">
+            <column name="name" value="Li Dzymin"/>
+            <column name="experience_years" valueNumeric="80"/>
+            <column name="phone" value="+8677225796529"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
+

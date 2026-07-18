@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Training</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/navigation :: menu}"></div>
+
+<a th:href="@{/trainings}">
+    Back to trainings
+</a>
+
+<hr>
+
+<h2>Training information</h2>
+
+<p>
+    <b>Date:</b>
+    <span th:text="${training.date}"></span>
+</p>
+
+<p>
+    <b>Duration:</b>
+    <span th:text="${training.duration}"></span>
+</p>
+
+<p>
+    <b>Topic:</b>
+    <span th:text="${training.topic}"></span>
+</p>
+
+<p>
+    <b>Group:</b>
+    <span th:text="${training.group.name}"></span>
+</p>
+
+<p>
+    <b>Coach:</b>
+    <span th:text="${training.coach.name}"></span>
+</p>
+
+<hr>
+
+<h2>Exercises</h2>
+
+<div th:if="${#lists.isEmpty(items)}">
+    No exercises assigned.
+</div>
+
+<table border="1"
+       th:if="${!#lists.isEmpty(items)}">
+
+    <tr>
+        <th>Order</th>
+        <th>Exercise</th>
+        <th>Repetitions</th>
+        <th>Duration</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="item : ${items}">
+
+        <td th:text="${item.orderIndex}"></td>
+
+        <td th:text="${item.exercise.name}"></td>
+
+        <td th:text="${item.repetitions}"></td>
+
+        <td th:text="${item.duration}"></td>
+
+        <td>
+
+            <form th:action="@{/trainings/{trainingId}/exercises/{exerciseId}/delete(
+            trainingId=${training.id},
+            exerciseId=${item.exercise.id})}"
+                  method="post">
+
+                <button type="submit"
+                        onclick="return confirm('Delete exercise?')">
+
+                    Delete
+
+                </button>
+
+            </form>
+
+        </td>
+
+    </tr>
+
+</table>
+
+<hr>
+
+<h2>Add Exercise</h2>
+
+<form th:action="@{/trainings/{id}/exercises(id=${training.id})}"
+      method="post">
+
+    <label>Exercise:</label>
+
+    <select name="exerciseId">
+
+        <option th:each="exercise : ${exercises}"
+                th:value="${exercise.id}"
+                th:text="${exercise.name}">
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <label>Repetitions:</label>
+
+    <input type="number"
+           name="repetitions"
+           required>
+
+    <br><br>
+
+    <label>Duration:</label>
+
+    <input type="number"
+           name="duration"
+           required>
+
+    <br><br>
+
+    <label>Order:</label>
+
+    <input type="number"
+           name="orderIndex"
+           required>
+
+    <br><br>
+
+    <button type="submit">
+        Assign
+    </button>
+
+</form>
+
+<hr>
+
+<h2>Attendance</h2>
+
+<p>
+    Present:
+    <b th:text="${presentCount}"></b>
+
+    &nbsp;&nbsp;
+
+    Absent:
+    <b th:text="${absentCount}"></b>
+</p>
+
+<div th:if="${#lists.isEmpty(attendance)}">
+    No attendance records.
+</div>
+
+<table border="1"
+       th:if="${!#lists.isEmpty(attendance)}">
+
+    <tr>
+        <th>Student</th>
+        <th>Status</th>
+        <th>Comment</th>
+    </tr>
+
+    <tr th:each="item : ${attendance}">
+
+        <td th:text="${item.student.name}"></td>
+
+        <td th:text="${item.status}"></td>
+
+        <td th:text="${item.comment}"></td>
+
+    </tr>
+
+</table>
+
+<hr>
+
+<h2>Mark Attendance</h2>
+
+<div th:if="${!#lists.isEmpty(availableStudents)}">
+
+    <form th:action="@{/trainings/{id}/attendance(id=${training.id})}"
+          method="post">
+
+        <label>Student:</label>
+
+        <select name="studentId">
+
+            <option th:each="student : ${availableStudents}"
+                    th:value="${student.id}"
+                    th:text="${student.name}">
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <label>Status:</label>
+
+        <select name="status">
+
+            <option value="PRESENT">
+                PRESENT
+            </option>
+
+            <option value="ABSENT">
+                ABSENT
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <label>Comment:</label>
+
+        <input type="text"
+               name="comment">
+
+        <br><br>
+
+        <button type="submit">
+            Save Attendance
+        </button>
+
+    </form>
+
+</div>
+
+<div th:if="${#lists.isEmpty(availableStudents)}">
+
+    <p style="color:green">
+
+        ✓ All students have already been marked for attendance.
+
+    </p>
+
+</div>
+
+</body>
+</html>

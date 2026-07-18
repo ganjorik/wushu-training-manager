@@ -1,0 +1,17 @@
+package com.wushu.entity;
+
+public enum ExerciseType {
+
+	BAGUA_PALM,
+	TZIBENGUN,
+	LYANCHUANZHANG,
+	LAOBAZHANG,
+	TANNI_BU,
+	BADUADZIN,
+	UDZINCI,
+	STRAIGHT_PATHS,
+	RACKS,
+	RAZMINKA,
+	NAN_CYAN
+
+}

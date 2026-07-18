@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Groups</title>
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navigation :: menu}"></div>
+
+<h1>Groups</h1>
+
+<div th:if="${error}"
+     style="color:red; font-weight:bold; margin-bottom:15px;">
+
+    <span th:text="${error}"></span>
+
+</div>
+
+<div sec:authorize="hasRole('ADMIN')">
+
+    <a th:href="@{/groups/new}">
+        Create Group
+    </a>
+
+</div>
+
+<br><br>
+
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Coach</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="group : ${groups}">
+
+        <td th:text="${group.id}"></td>
+
+        <td th:text="${group.name}"></td>
+
+        <td th:text="${group.level}"></td>
+
+        <td th:text="${group.coachName}"></td>
+
+        <td>
+
+            <a th:href="@{/groups/{id}(id=${group.id})}">
+                View
+            </a>
+
+            <span sec:authorize="hasRole('ADMIN')">
+
+                &nbsp;
+
+                <a th:href="@{/groups/edit/{id}(id=${group.id})}">
+                    Edit
+                </a>
+
+                &nbsp;
+
+                <form th:action="@{/groups/delete/{id}(id=${group.id})}"
+                      method="post"
+                      style="display:inline">
+
+                    <button type="submit">
+                        Delete
+                    </button>
+
+                </form>
+
+            </span>
+
+        </td>
+
+    </tr>
+
+</table>
+
+<br><br>
+
+<div>
+
+    <a th:if="${currentPage > 0}"
+       th:href="@{/groups(page=${currentPage - 1})}">
+        ← Previous
+    </a>
+
+    &nbsp;&nbsp;
+
+    <span>
+        Page <span th:text="${currentPage + 1}"></span>
+        of
+        <span th:text="${totalPages}"></span>
+    </span>
+
+    &nbsp;&nbsp;
+
+    <a th:if="${currentPage + 1 < totalPages}"
+       th:href="@{/groups(page=${currentPage + 1})}">
+        Next →
+    </a>
+
+</div>
+
+</body>
+</html>

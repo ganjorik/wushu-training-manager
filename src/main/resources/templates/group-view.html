@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Group</title>
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navigation :: menu}"></div>
+
+<a th:href="@{/groups}">
+    Back to groups
+</a>
+
+<hr>
+
+<h2>Group information</h2>
+
+<p>
+    <b>Name:</b>
+    <span th:text="${group.name}"></span>
+</p>
+
+<p>
+    <b>Level:</b>
+    <span th:text="${group.level}"></span>
+</p>
+
+<p>
+    <b>Coach:</b>
+    <span th:text="${group.coach.name}"></span>
+</p>
+
+<hr>
+
+<h2>
+    Students
+    (<span th:text="${group.students.size()}"></span>)
+</h2>
+
+<div th:if="${#sets.isEmpty(group.students)}">
+    No students in this group.
+</div>
+
+<table border="1"
+       th:if="${!#sets.isEmpty(group.students)}">
+
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Phone</th>
+
+        <th sec:authorize="hasRole('ADMIN')">
+            Actions
+        </th>
+
+    </tr>
+
+    <tr th:each="student, stat : ${group.students}">
+
+        <td th:text="${stat.count}"></td>
+
+        <td th:text="${student.name}"></td>
+
+        <td th:text="${student.age}"></td>
+
+        <td th:text="${student.phone}"></td>
+
+        <td sec:authorize="hasRole('ADMIN')">
+
+            <form th:action="@{/groups/{groupId}/students/{studentId}/delete(
+                    groupId=${group.id},
+                    studentId=${student.id})}"
+                  method="post">
+
+                <button type="submit"
+                        onclick="return confirm('Remove student?')">
+
+                    Remove
+
+                </button>
+
+            </form>
+
+        </td>
+
+    </tr>
+
+</table>
+
+<div sec:authorize="hasRole('ADMIN')">
+
+    <hr>
+
+    <h2>Add student to group</h2>
+
+    <form th:action="@{/groups/{id}/students(id=${group.id})}"
+          method="post">
+
+        <select name="studentId">
+
+            <option th:each="student : ${students}"
+                    th:value="${student.id}"
+                    th:text="${student.name}">
+            </option>
+
+        </select>
+
+        <button type="submit">
+            Assign
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

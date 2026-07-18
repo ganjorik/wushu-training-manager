@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Student</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/navigation :: menu}"></div>
+
+<h2>Create Student</h2>
+
+<form th:action="@{/students}"
+      th:object="${student}"
+      method="post">
+
+    <label>Name:</label><br>
+
+    <input type="text"
+           th:field="*{name}">
+
+    <div th:if="${#fields.hasErrors('name')}"
+         th:errors="*{name}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <label>Age:</label><br>
+
+    <input type="number"
+           th:field="*{age}">
+
+    <div th:if="${#fields.hasErrors('age')}"
+         th:errors="*{age}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <label>Phone:</label><br>
+
+    <input type="text"
+           th:field="*{phone}">
+
+    <div th:if="${#fields.hasErrors('phone')}"
+         th:errors="*{phone}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <button type="submit">
+        Create
+    </button>
+
+</form>
+
+<br>
+
+<a th:href="@{/students}">
+    Back
+</a>
+
+</body>
+</html>

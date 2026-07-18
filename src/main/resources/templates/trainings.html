@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Trainings</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/navigation :: menu}"></div>
+
+<h1>Training Sessions</h1>
+
+<div th:if="${error}"
+     style="color:red;
+            font-weight:bold;
+            margin-bottom:15px;">
+
+    <span th:text="${error}"></span>
+
+</div>
+
+<a th:href="@{/trainings/new}">
+    Create Training
+</a>
+
+<br><br>
+
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Topic</th>
+        <th>Group</th>
+        <th>Coach</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="training : ${trainings}">
+
+        <td th:text="${training.id}"></td>
+
+        <td th:text="${training.date}"></td>
+
+        <td th:text="${training.duration}"></td>
+
+        <td th:text="${training.topic}"></td>
+
+        <td th:text="${training.groupName}"></td>
+
+        <td th:text="${training.coachName}"></td>
+
+        <td>
+
+            <a th:href="@{/trainings/{id}(id=${training.id})}">
+                View
+            </a>
+
+            <a th:href="@{/trainings/edit/{id}(id=${training.id})}">
+                Edit
+            </a>
+
+            <form th:action="@{/trainings/delete/{id}(id=${training.id})}"
+                  method="post"
+                  style="display:inline">
+
+                <button type="submit">
+                    Delete
+                </button>
+
+            </form>
+
+        </td>
+
+    </tr>
+
+</table>
+
+<br><br>
+
+<div>
+
+    <a th:if="${currentPage > 0}"
+       th:href="@{/trainings(page=${currentPage - 1})}">
+        ← Previous
+    </a>
+
+    &nbsp;&nbsp;
+
+    <span>
+        Page <span th:text="${currentPage + 1}"></span>
+        of
+        <span th:text="${totalPages}"></span>
+    </span>
+
+    &nbsp;&nbsp;
+
+    <a th:if="${currentPage + 1 < totalPages}"
+       th:href="@{/trainings(page=${currentPage + 1})}">
+        Next →
+    </a>
+
+</div>
+
+</body>
+</html>

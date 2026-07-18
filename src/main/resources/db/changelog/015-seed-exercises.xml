@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="015-seed-exercises" author="den">
+
+        <insert tableName="exercise">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="Palm"/>
+            <column name="type" value="BAGUA_PALM"/>
+            <column name="difficulty" value="INTERMEDIATE"/>
+            <column name="description" value="Basic technique bagua palm."/>
+        </insert>
+
+        <insert tableName="exercise">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="Eight Basic"/>
+            <column name="type" value="TZIBENGUN"/>
+            <column name="difficulty" value="INTERMEDIATE"/>
+            <column name="description" value="Basic technique eight basic."/>
+        </insert>
+
+        <insert tableName="exercise">
+            <column name="id" valueNumeric="3"/>
+            <column name="name" value="Basic racks"/>
+            <column name="type" value="RACKS"/>
+            <column name="difficulty" value="BEGINNER"/>
+            <column name="description" value="Basic racks in baguazhang."/>
+        </insert>
+
+        <insert tableName="exercise">
+            <column name="id" valueNumeric="4"/>
+            <column name="name" value="Eight old palms"/>
+            <column name="type" value="LAOBAZHANG"/>
+            <column name="difficulty" value="ADVANCED"/>
+            <column name="description" value="Basic technique eight old palms."/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

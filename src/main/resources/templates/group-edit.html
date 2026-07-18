@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Group</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/navigation :: menu}"></div>
+
+<h2>Edit Group</h2>
+
+<form th:action="@{/groups/update/{id}(id=${group.id})}"
+      th:object="${group}"
+      method="post">
+
+    <label>Name:</label><br>
+
+    <input type="text"
+           th:field="*{name}">
+
+    <div th:if="${#fields.hasErrors('name')}"
+         th:errors="*{name}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <label>Level:</label><br>
+
+    <input type="text"
+           th:field="*{level}">
+
+    <div th:if="${#fields.hasErrors('level')}"
+         th:errors="*{level}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <label>Coach:</label><br>
+
+    <select th:field="*{coachId}">
+
+        <option value="">-- Select coach --</option>
+
+        <option th:each="coach : ${coaches}"
+                th:value="${coach.id}"
+                th:text="${coach.name}">
+        </option>
+
+    </select>
+
+    <div th:if="${#fields.hasErrors('coachId')}"
+         th:errors="*{coachId}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <button type="submit">
+        Save
+    </button>
+
+</form>
+
+<br>
+
+<a th:href="@{/groups}">
+    Back
+</a>
+
+</body>
+</html>

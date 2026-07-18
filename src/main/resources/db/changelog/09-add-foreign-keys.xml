@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+           http://www.liquibase.org/xml/ns/dbchangelog
+           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="09-add-foreign-keys" author="den">
+
+        <!-- group_training -> coach -->
+        <addForeignKeyConstraint
+                baseTableName="group_training"
+                baseColumnNames="coach_id"
+                referencedTableName="coach"
+                referencedColumnNames="id"
+                constraintName="fk_group_coach"/>
+
+
+        <!-- student_group -> student -->
+        <addForeignKeyConstraint
+                baseTableName="student_group"
+                baseColumnNames="student_id"
+                referencedTableName="student"
+                referencedColumnNames="id"
+                constraintName="fk_student_group_student"/>
+
+
+        <!-- student_group -> group_training -->
+        <addForeignKeyConstraint
+                baseTableName="student_group"
+                baseColumnNames="group_id"
+                referencedTableName="group_training"
+                referencedColumnNames="id"
+                constraintName="fk_student_group_group"/>
+
+
+        <!-- training_session -> group_training -->
+        <addForeignKeyConstraint
+                baseTableName="training_session"
+                baseColumnNames="group_id"
+                referencedTableName="group_training"
+                referencedColumnNames="id"
+                constraintName="fk_training_group"/>
+
+
+        <!-- training_session -> coach -->
+        <addForeignKeyConstraint
+                baseTableName="training_session"
+                baseColumnNames="coach_id"
+                referencedTableName="coach"
+                referencedColumnNames="id"
+                constraintName="fk_training_coach"/>
+
+
+        <!-- training_exercise -> training_session -->
+        <addForeignKeyConstraint
+                baseTableName="training_exercise"
+                baseColumnNames="training_id"
+                referencedTableName="training_session"
+                referencedColumnNames="id"
+                constraintName="fk_training_exercise_training"/>
+
+
+        <!-- training_exercise -> exercise -->
+        <addForeignKeyConstraint
+                baseTableName="training_exercise"
+                baseColumnNames="exercise_id"
+                referencedTableName="exercise"
+                referencedColumnNames="id"
+                constraintName="fk_training_exercise_exercise"/>
+
+
+        <!-- attendance -> training_session -->
+        <addForeignKeyConstraint
+                baseTableName="attendance"
+                baseColumnNames="training_id"
+                referencedTableName="training_session"
+                referencedColumnNames="id"
+                constraintName="fk_attendance_training"/>
+
+
+        <!-- attendance -> student -->
+        <addForeignKeyConstraint
+                baseTableName="attendance"
+                baseColumnNames="student_id"
+                referencedTableName="student"
+                referencedColumnNames="id"
+                constraintName="fk_attendance_student"/>
+
+    </changeSet>
+
+</databaseChangeLog>

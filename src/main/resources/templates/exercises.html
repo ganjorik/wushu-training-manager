@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exercises</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/navigation :: menu}"></div>
+
+<h1>Exercises</h1>
+
+<div th:if="${error}"
+     style="color:red; font-weight:bold; margin-bottom:15px;">
+
+    <span th:text="${error}"></span>
+
+</div>
+
+<a th:href="@{/exercises/new}">
+    Create Exercise
+</a>
+
+<br><br>
+
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Difficulty</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="exercise : ${exercises}">
+
+        <td th:text="${exercise.id}"></td>
+
+        <td th:text="${exercise.name}"></td>
+
+        <td th:text="${exercise.type}"></td>
+
+        <td th:text="${exercise.difficulty}"></td>
+
+        <td th:text="${exercise.description}"></td>
+
+        <td>
+
+            <a th:href="@{/exercises/edit/{id}(id=${exercise.id})}">
+                Edit
+            </a>
+
+            <form th:action="@{/exercises/delete/{id}(id=${exercise.id})}"
+                  method="post"
+                  style="display:inline">
+
+                <button type="submit">
+                    Delete
+                </button>
+
+            </form>
+
+        </td>
+
+    </tr>
+
+</table>
+
+<br><br>
+
+<div>
+
+    <a th:if="${currentPage > 0}"
+       th:href="@{/exercises(page=${currentPage - 1})}">
+        ← Previous
+    </a>
+
+    &nbsp;&nbsp;
+
+    <span>
+        Page <span th:text="${currentPage + 1}"></span>
+        of
+        <span th:text="${totalPages}"></span>
+    </span>
+
+    &nbsp;&nbsp;
+
+    <a th:if="${currentPage + 1 < totalPages}"
+       th:href="@{/exercises(page=${currentPage + 1})}">
+        Next →
+    </a>
+
+</div>
+
+</body>
+</html>

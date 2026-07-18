@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Exercise</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/navigation :: menu}"></div>
+
+<h2>Edit Exercise</h2>
+
+<form th:action="@{/exercises/update/{id}(id=${exercise.id})}"
+      th:object="${exercise}"
+      method="post">
+
+    <label>Name:</label><br>
+
+    <input type="text"
+           th:field="*{name}">
+
+    <div th:if="${#fields.hasErrors('name')}"
+         th:errors="*{name}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <label>Type:</label><br>
+
+    <select th:field="*{type}">
+
+        <option value="">-- Select type --</option>
+
+        <option th:each="type : ${T(com.wushu.entity.ExerciseType).values()}"
+                th:value="${type}"
+                th:text="${type}">
+        </option>
+
+    </select>
+
+    <div th:if="${#fields.hasErrors('type')}"
+         th:errors="*{type}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <label>Difficulty:</label><br>
+
+    <select th:field="*{difficulty}">
+
+        <option value="">-- Select difficulty --</option>
+
+        <option th:each="difficulty : ${T(com.wushu.entity.DifficultyLevel).values()}"
+                th:value="${difficulty}"
+                th:text="${difficulty}">
+        </option>
+
+    </select>
+
+    <div th:if="${#fields.hasErrors('difficulty')}"
+         th:errors="*{difficulty}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <label>Description:</label><br>
+
+    <textarea th:field="*{description}"
+              rows="5"
+              cols="40">
+    </textarea>
+
+    <div th:if="${#fields.hasErrors('description')}"
+         th:errors="*{description}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <button type="submit">
+        Save
+    </button>
+
+</form>
+
+<br>
+
+<a th:href="@{/exercises}">
+    Back
+</a>
+
+</body>
+</html>

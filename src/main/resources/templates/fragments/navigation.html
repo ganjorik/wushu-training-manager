@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+<div th:fragment="menu">
+
+    <div style="padding:12px;
+                background:#f5f5f5;
+                border-bottom:1px solid #ccc;">
+
+        <span style="font-size:22px;
+                     font-weight:bold;">
+
+            🥋 Wushu Training Manager
+
+        </span>
+
+        <br><br>
+
+        <span sec:authorize="hasRole('ADMIN')">
+
+            <a th:href="@{/coaches}">
+                Coaches
+            </a>
+
+            |
+
+        </span>
+
+        <span sec:authorize="hasRole('ADMIN')">
+
+            <a th:href="@{/students}">
+                Students
+            </a>
+
+            |
+
+        </span>
+
+        <a th:href="@{/groups}">
+            Groups
+        </a>
+
+        |
+
+        <a th:href="@{/trainings}">
+            Trainings
+        </a>
+
+        <span sec:authorize="hasRole('ADMIN')">
+
+            |
+
+            <a th:href="@{/exercises}">
+                Exercises
+            </a>
+
+        </span>
+
+        <span style="float:right">
+
+            <form th:action="@{/logout}"
+                  method="post"
+                  style="display:inline;">
+
+                <button type="submit">
+                    Logout
+                </button>
+
+            </form>
+
+        </span>
+
+    </div>
+
+    <br>
+
+</div>
+
+</body>
+</html>

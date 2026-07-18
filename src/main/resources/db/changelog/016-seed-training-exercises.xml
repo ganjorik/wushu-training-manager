@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="016-seed-training-exercises" author="den">
+        
+        <insert tableName="training_exercise">
+            <column name="training_id" valueNumeric="1"/>
+            <column name="exercise_id" valueNumeric="2"/>
+            <column name="repetitions" valueNumeric="8"/>
+            <column name="duration" valueNumeric="15"/>
+            <column name="order_index" valueNumeric="1"/>
+        </insert>
+        <insert tableName="training_exercise">
+            <column name="training_id" valueNumeric="1"/>
+            <column name="exercise_id" valueNumeric="1"/>
+            <column name="repetitions" valueNumeric="2"/>
+            <column name="duration" valueNumeric="18"/>
+            <column name="order_index" valueNumeric="2"/>
+        </insert>
+
+
+        <insert tableName="training_exercise">
+            <column name="training_id" valueNumeric="2"/>
+            <column name="exercise_id" valueNumeric="3"/>
+            <column name="repetitions" valueNumeric="1"/>
+            <column name="duration" valueNumeric="15"/>
+            <column name="order_index" valueNumeric="1"/>
+        </insert>
+        <insert tableName="training_exercise">
+            <column name="training_id" valueNumeric="2"/>
+            <column name="exercise_id" valueNumeric="4"/>
+            <column name="repetitions" valueNumeric="4"/>
+            <column name="duration" valueNumeric="25"/>
+            <column name="order_index" valueNumeric="2"/>
+        </insert>
+
+
+    </changeSet>
+</databaseChangeLog>

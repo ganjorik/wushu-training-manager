@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+           http://www.liquibase.org/xml/ns/dbchangelog
+           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="07-create-training-exercise-table" author="den">
+
+        <createTable tableName="training_exercise">
+
+            <column name="training_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="exercise_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="repetitions" type="INT"/>
+
+            <column name="duration" type="INT"/>
+
+            <column name="order_index" type="INT"/>
+
+        </createTable>
+
+        <addPrimaryKey
+                tableName="training_exercise"
+                columnNames="training_id, exercise_id"
+                constraintName="pk_training_exercise"/>
+
+    </changeSet>
+
+</databaseChangeLog>

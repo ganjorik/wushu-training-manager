@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Training</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/navigation :: menu}"></div>
+
+<h2>Create Training</h2>
+
+<form th:action="@{/trainings}"
+      th:object="${training}"
+      method="post">
+
+    <label>Date:</label><br>
+
+    <input type="date"
+           th:field="*{date}">
+
+    <div th:if="${#fields.hasErrors('date')}"
+         th:errors="*{date}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <label>Duration:</label><br>
+
+    <input type="number"
+           th:field="*{duration}">
+
+    <div th:if="${#fields.hasErrors('duration')}"
+         th:errors="*{duration}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <label>Topic:</label><br>
+
+    <input type="text"
+           th:field="*{topic}">
+
+    <div th:if="${#fields.hasErrors('topic')}"
+         th:errors="*{topic}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <label>Group:</label><br>
+
+    <select th:field="*{groupId}">
+
+        <option value="">-- Select group --</option>
+
+        <option th:each="group : ${groups}"
+                th:value="${group.id}"
+                th:text="${group.name}">
+        </option>
+
+    </select>
+
+    <div th:if="${#fields.hasErrors('groupId')}"
+         th:errors="*{groupId}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <label>Coach:</label><br>
+
+    <select th:field="*{coachId}">
+
+        <option value="">-- Select coach --</option>
+
+        <option th:each="coach : ${coaches}"
+                th:value="${coach.id}"
+                th:text="${coach.name}">
+        </option>
+
+    </select>
+
+    <div th:if="${#fields.hasErrors('coachId')}"
+         th:errors="*{coachId}"
+         style="color:red;font-size:13px">
+    </div>
+
+    <br>
+
+    <button type="submit">
+        Create
+    </button>
+
+</form>
+
+<br>
+
+<a th:href="@{/trainings}">
+    Back
+</a>
+
+</body>
+</html>

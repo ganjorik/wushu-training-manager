@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="012-seed-students" author="den">
+
+        <insert tableName="student">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="Jackie Chan"/>
+            <column name="age" valueNumeric="18"/>
+            <column name="phone" value="+86772587985412"/>
+        </insert>
+
+        <insert tableName="student">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="Bruce Lee"/>
+            <column name="age" valueNumeric="19"/>
+            <column name="phone" value="+867725822362"/>
+        </insert>
+
+        <insert tableName="student">
+            <column name="id" valueNumeric="3"/>
+            <column name="name" value="Jet Li"/>
+            <column name="age" valueNumeric="20"/>
+            <column name="phone" value="+8672227888552"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
