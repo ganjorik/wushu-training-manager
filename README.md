@@ -23,6 +23,12 @@ This project was developed to practice backend development using modern Java and
 - Database versioning with Liquibase
 - Unit testing with JUnit 5 and Mockito
 
+## 🗺️ Roadmap (In Progress)
+The application is currently being actively updated to meet modern enterprise standards. The current focus includes:
+- [ ] **Database Migration:** Transitioning the primary database from MySQL to **PostgreSQL** using Liquibase.
+- [ ] **REST API Development:** Designing and implementing RESTful endpoints alongside the existing MVC controllers for frontend decoupling.
+- [ ] **API Documentation:** Integrating Swagger/OpenAPI for the upcoming REST endpoints.
+- [ ] **Testing:** Finalizing the test coverage using the H2 in-memory database for integration tests.
 ---
 
 ## 🛠 Technology Stack
@@ -38,7 +44,8 @@ This project was developed to practice backend development using modern Java and
 
 ### Database
 
-- MySQL
+- MySQL (Current)
+- **PostgreSQL (Migration in progress)**
 - Liquibase
 - H2 (for tests)
 
