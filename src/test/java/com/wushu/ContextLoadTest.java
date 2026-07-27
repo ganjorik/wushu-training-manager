@@ -1,13 +1,16 @@
-package com.wushu.wushutrainingmanagerspring;
+package com.wushu;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
-class WushuTrainingManagerSpringApplicationTests {
+@ActiveProfiles("test")
+class ContextLoadTest {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

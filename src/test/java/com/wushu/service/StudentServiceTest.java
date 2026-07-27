@@ -1,4 +1,4 @@
-package com.wushu.wushutrainingmanagerspring.service;
+package com.wushu.service;
 
 import com.wushu.entity.GroupTraining;
 import com.wushu.entity.Student;

@@ -1,10 +1,9 @@
-package com.wushu.wushutrainingmanagerspring.service;
+package com.wushu.service;
 
 import com.wushu.entity.Coach;
 import com.wushu.exception.BusinessException;
 import com.wushu.repository.CoachRepository;
 import com.wushu.repository.TrainingSessionRepository;
-import com.wushu.service.CoachServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
