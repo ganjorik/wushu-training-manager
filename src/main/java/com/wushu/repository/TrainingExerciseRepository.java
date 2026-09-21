@@ -20,14 +20,9 @@ public interface TrainingExerciseRepository
 	})
 	List<TrainingExercise> findByTrainingIdOrderByOrderIndex(Long trainingId);
 
-	Optional<TrainingExercise> findByTrainingIdAndExerciseId(
-			Long trainingId,
-			Long exerciseId
-	);
 
 	boolean existsByExerciseId(Long exerciseId);
 
-	boolean existsByTrainingId(Long trainingId);
 
 	@Modifying
 	@Transactional
