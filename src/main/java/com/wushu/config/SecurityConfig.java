@@ -79,6 +79,9 @@ public class SecurityConfig {
 						.requestMatchers("/trainings/**")
 						.hasAnyRole("ADMIN", "COACH")
 
+						.requestMatchers(HttpMethod.GET, "/api/v1/students/**")
+						.permitAll()
+
 						.anyRequest()
 						.authenticated()
 				)

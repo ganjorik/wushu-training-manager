@@ -2,6 +2,7 @@ package com.wushu.service;
 
 import com.wushu.entity.Student;
 import com.wushu.exception.BusinessException;
+import com.wushu.exception.NotFoundException;
 import com.wushu.repository.AttendanceRepository;
 import com.wushu.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +41,7 @@ public class StudentServiceImpl implements StudentService {
 
 					log.warn("Student with id={} not found", id);
 
-					return new BusinessException("Student not found");
+					return new NotFoundException("Student not found");
 				});
 	}
 
