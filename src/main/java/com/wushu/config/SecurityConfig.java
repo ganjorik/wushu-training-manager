@@ -5,10 +5,13 @@ import com.wushu.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -35,6 +38,20 @@ public class SecurityConfig {
 	}
 
 	@Bean
+	@Order(1)
+	public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
+		http
+				.securityMatcher("/api/**")
+				.csrf(csrf -> csrf.disable())
+				.userDetailsService(userDetailsService)
+				.authorizeHttpRequests(a -> a.anyRequest().hasAnyRole("ADMIN", "COACH"))
+				.httpBasic(Customizer.withDefaults())
+				.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		return http.build();
+	}
+
+	@Bean
+	@Order(2)
 	public SecurityFilterChain securityFilterChain(
 			HttpSecurity http)
 		throws Exception {
@@ -45,6 +62,9 @@ public class SecurityConfig {
 				.userDetailsService(userDetailsService)
 
 				.authorizeHttpRequests(auth -> auth
+
+						.requestMatchers("/error")
+						.permitAll()
 
 						.requestMatchers("/login")
 						.permitAll()
@@ -78,9 +98,6 @@ public class SecurityConfig {
 
 						.requestMatchers("/trainings/**")
 						.hasAnyRole("ADMIN", "COACH")
-
-						.requestMatchers(HttpMethod.GET, "/api/v1/students/**")
-						.permitAll()
 
 						.anyRequest()
 						.authenticated()
